@@ -63,7 +63,7 @@ function onStartClick() {
     refs.min.textContent = addLeadingZero(minutes);
     refs.sec.textContent = addLeadingZero(seconds);
 
-    if (timerId < 1000) {
+    if (timeTimer < 1000) {
       clearInterval(timerId);
       refs.btn.disabled = false;
     return
