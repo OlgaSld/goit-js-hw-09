@@ -33,7 +33,7 @@ const options = {
          timeout: 1000,
       },
     )}
-    console.log(selectedDates[0]);
+    // console.log(selectedDates[0]);
   },
 };
  
@@ -43,11 +43,17 @@ refs.btn.addEventListener('click', onStartClick);
 
 function onStartClick() {
   // console.log(`click on button`);
-  const selectedDates = flPickr.selectedDates[0];
+  // const selectedDate = flPickr.selectedDates[0];
+  const selectedDate = flPickr.selectedDates[0].getTime();
+  // console.log(`selectedDate`, selectedDate);
 
   timerId = setInterval(() => {
-    const currentDate = new Date();
-    const timeTimer = selectedDates - currentDate;
+    // const currentDate = new Date();
+    const currentDate = Date.now();
+    // console.log(`currentDate`, currentDate);
+    const timeTimer = selectedDate - currentDate;
+    // console.log(selectedDate - currentDate);
+    // console.log(`timeTimer`, timeTimer);
     refs.btn.disabled = true;
 
     const { days, hours, minutes, seconds } = convertMs(timeTimer);
@@ -58,7 +64,8 @@ function onStartClick() {
     refs.sec.textContent = addLeadingZero(seconds);
 
     if (timerId < 1000) {
-    clearInterval(timerId);
+      clearInterval(timerId);
+      refs.btn.disabled = false;
     return
     }
   }, 1000)
